@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+.header{
+  background-color: #393548;
+  display: flex;
+  flex-direction: row;
+}
+
+.header > ul {
+  display: inline;
+  color: white;
+}
+
+.pet-corner-logo {
+  width: 150px;
+}
