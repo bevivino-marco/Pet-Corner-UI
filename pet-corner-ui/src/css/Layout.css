@@ -1,53 +1,153 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .App {
-  text-align: center;
-}
+  display: flex;    
+  height: 100vh;
+}  
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.main {
+  padding: 0;
   display: flex;
   flex-direction: column;
+  width: -webkit-fill-available;
+}
+
+.content {
+  background-color: whitesmoke;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  text-align: center;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+/************************************************************ SIDENAV *******************************************************/
+
+.sidenav {
+width: 250px;
+transition: width 0.3s ease-in-out;
+background-color: rgb(57,53,72);
+padding-top: 20px;
+}
+
+.sidenavClosed {
+  transition: width 0.3s ease-in-out;
+  background-color: rgb(57,53,72);
+  width: 60px;
+  padding-top: 20px;
+}
+
+.sideitem {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 10px 20px;
+  cursor: pointer;
+  color: #B2BAC2;
+  text-decoration: none;
+}
+
+.linkText {
+  padding-left: 16px;
+}
+
+.linkTextClosed {
+  visibility: hidden;
+}
+
+.sideitem:hover {
+  background-color: rgb(98,205,163); 
+  color: rgb(57,53,72);
+}
+
+.menuBtn {
+  align-self: center;
+  align-self: flex-start;
+  justify-self: flex-end;
+  color: #B2BAC2;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding-left: 20px;
+}
+
+/************************************************************ NAVBAR *******************************************************/
+
+.navbar {
+  width: -webkit-fill-available;
+  height: fit-content;
+  background-color: rgb(98,205,163);
+  padding: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.login-button {
+  background-color: rgb(57,53,72);
+  color: white;
+  padding: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center; 
+  border: none;
+  border-radius: 50%;
+  margin-left: 5px;
+}
+
+.login-button:hover {
+  box-shadow: 0 10px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+/************************************************************ FOOTER *******************************************************/
+
+.footer {
+  width: -webkit-fill-available;
+  background-color: rgb(98,205,163);
+  height: fit-content;
+  padding: 10px;
+  contain: ;
+  flex-direction: column;
+  text-align: center;
+  font-size: 10px;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.header{
-  background-color: #393548;
+.footer-content {
   display: flex;
   flex-direction: row;
 }
 
-.header > ul {
-  display: inline;
-  color: white;
+.footer-contacts { 
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
-.pet-corner-logo {
-  width: 150px;
+.footer-contacts > div > svg { 
+  vertical-align: middle !important;
+}
+
+.footer-buttons {
+  text-align: center;
+  flex: 1;
+}
+
+.footer-button {
+  background-color: rgb(57,53,72);
+  color: white;
+  padding: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center; 
+  border: none;
+  border-radius: 50%;
+  margin-left: 5px;
+}
+
+.footer-button:hover {
+  box-shadow: 0 10px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }
