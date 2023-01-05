@@ -14,9 +14,9 @@ function App() {
       <div className='App'>
         <Sidenav open={open} setOpen={setOpen} setContent={setContent} />
         <div className='main'>
-          <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+          <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} setContent={setContent} />
           <div className='content'>
-            <Content content={content}/>
+            <Content content={content} />
           </div>
           <Footer />
         </div>

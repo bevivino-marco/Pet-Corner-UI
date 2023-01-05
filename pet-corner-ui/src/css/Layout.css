@@ -101,6 +101,74 @@ padding-top: 20px;
   box-shadow: 0 10px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
+/************************************************************ REGISTRATION *******************************************************/
+
+.error{
+  color: #D8000C;
+  background-color: #FFBABA;
+  background-image: url('https://i.imgur.com/GnyDvKN.png');
+  border: 1px solid;
+	padding: 10px 10px 10px 10px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+  animation: fadeInAnimation ease 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.registration-container{
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin: auto;
+}
+
+.registration-container > div{
+  margin-bottom: 5px;
+  text-align: right;
+}
+
+.registration-container > div > input{
+  margin: 5px;
+  width: 250px;
+}
+
+.register-button > svg {
+  vertical-align: middle !important;
+}
+
+.register-button {
+  background-color: rgb(57,53,72);
+  color: white;
+  padding: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center; 
+  border: none;
+  border-radius: "1%";
+  width: fit-content;
+  text-align: center;
+}
+
+/************************************************************ LOGIN *******************************************************/
+
+.login-container{
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin: auto;
+}
+
+.login-container > div{
+  margin-bottom: 5px;
+  text-align: right;
+}
+
+.login-container > div > input{
+  margin: 5px;
+  width: 250px;
+}
+
 /************************************************************ FOOTER *******************************************************/
 
 .footer {
@@ -108,7 +176,6 @@ padding-top: 20px;
   background-color: rgb(98,205,163);
   height: fit-content;
   padding: 10px;
-  contain: ;
   flex-direction: column;
   text-align: center;
   font-size: 10px;
@@ -150,4 +217,15 @@ padding-top: 20px;
 
 .footer-button:hover {
   box-shadow: 0 10px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+/************************************************************ ANIMATIONS *******************************************************/
+
+@keyframes fadeInAnimation {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+   }
 }
