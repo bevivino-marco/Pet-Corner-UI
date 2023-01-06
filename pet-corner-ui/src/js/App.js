@@ -6,17 +6,18 @@ import Sidenav from './components/Sidenav';
 import Content from './components/Content';
 
 function App() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [content, setContent] = useState("Home");
+  const [content, setContent] = useState("Login");
+  const [username, setUsername] = useState("");
 
   return (
       <div className='App'>
         <Sidenav open={open} setOpen={setOpen} setContent={setContent} />
         <div className='main'>
-          <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} setContent={setContent} />
+          <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} setContent={setContent} username={username} />
           <div className='content'>
-            <Content content={content} />
+            <Content content={content} setContent={setContent} setLoggedIn={setLoggedIn} setUsername={setUsername} />
           </div>
           <Footer />
         </div>

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import callAjax from '../lib/Ajax';
 
-export default function Registration() {
+export default function Registration({setContent, setSuccess}) {
     const [error, setError] = useState("");
 
     const ref_name = React.createRef();
@@ -49,8 +49,28 @@ export default function Registration() {
                 city: ref_city.current.value,
                 address: ref_address.current.value
             }), 
-            success: function (data, textStatus, xhr) {
-                console.log(textStatus);
+            success: function (response) {
+                setSuccess('Account creato correttamente! Procedi con il login');
+                setContent('Login');
+            },
+            error: function (jqXHR, exception) {
+                var msg = '';
+                if (jqXHR.status === 0) {
+                    msg = 'Not connect.\n Verify Network.';
+                } else if (jqXHR.status === 404) {
+                    msg = 'Requested page not found. [404]';
+                } else if (jqXHR.status === 500) {
+                    msg = 'Internal Server Error [500].';
+                } else if (exception === 'parsererror') {
+                    msg = 'Requested JSON parse failed.';
+                } else if (exception === 'timeout') {
+                    msg = 'Time out error.';
+                } else if (exception === 'abort') {
+                    msg = 'Ajax request aborted.';
+                } else {
+                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                }
+                setError(msg);
             }
         };
         callAjax(options);

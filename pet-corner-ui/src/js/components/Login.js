@@ -2,7 +2,7 @@ import React from 'react';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import callAjax from '../lib/Ajax';
 
-export default function Login() {
+export default function Login({success, setSuccess, setContent, setLoggedIn, setUsername}) {
     const [error, setError] = React.useState("");
 
     const ref_email = React.createRef();
@@ -23,22 +23,46 @@ export default function Login() {
             setError("Password mancante");
             return;
         }
-        
+
+        const formData = new FormData();
+        formData.append('username', ref_email.current.value);
+        formData.append('password', ref_password.current.value);
+
         let options = {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
+            headers: null,
             type: "post",
             url: "http://localhost:9000/api/v1/login",
-            dataType: "json",
+            dataType: null,
             cache: false,
-            data: JSON.stringify({                
-                username: ref_email.current.value,
-                password: ref_password.current.value,
-            }), 
-            success: function (data, textStatus, xhr) {
-                console.log(textStatus);
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                setSuccess('');
+                sessionStorage.setItem("access_token", response.access_token);
+                sessionStorage.setItem("refresh_token", response.refresh_token);
+                setLoggedIn(true);
+                setUsername(ref_email.current.value);
+                setContent('Profile');
+            }, 
+            error: function (jqXHR, exception) {
+                var msg = '';
+                if (jqXHR.status === 0) {
+                    msg = 'Not connect.\n Verify Network.';
+                } else if (jqXHR.status === 404) {
+                    msg = 'Requested page not found. [404]';
+                } else if (jqXHR.status === 500) {
+                    msg = 'Internal Server Error [500].';
+                } else if (exception === 'parsererror') {
+                    msg = 'Requested JSON parse failed.';
+                } else if (exception === 'timeout') {
+                    msg = 'Time out error.';
+                } else if (exception === 'abort') {
+                    msg = 'Ajax request aborted.';
+                } else {
+                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                }
+                setError(msg);
             }
         };
         callAjax(options);
@@ -46,6 +70,7 @@ export default function Login() {
 
     return (
         <>
+            {success !== '' && <div className='success'>{success}</div> }
             {error !== '' && <div className='error'>{error}</div> }
             <h1>Login</h1>
             <div className="login-container">
