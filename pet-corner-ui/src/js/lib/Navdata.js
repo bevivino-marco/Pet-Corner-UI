@@ -21,7 +21,7 @@ export const navData = [
     {
         id: 2,
         icon: <SpaIcon />,
-        text: "Therapy",
+        text: "Pet Therapy",
         link: "/"
     },
     {

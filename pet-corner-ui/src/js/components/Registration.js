@@ -114,7 +114,7 @@ export default function Registration({setContent, setSuccess}) {
                     <label htmlFor="psw-repeat"><b>Ripeti Password</b></label>
                     <input type="password" ref={ref_password2} placeholder="Ripeti Password" name="psw-repeat" id="psw-repeat" required />
                 </div>
-                <button className="register-button" onClick={() => { RegistrationClick();}}>REGISTRATI<ArrowRightIcon /></button>
+                <button className="login1-button" onClick={() => { RegistrationClick();}}>Registrati<ArrowRightIcon /></button>
             </div>
         </>
         

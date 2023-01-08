@@ -81,8 +81,12 @@ export default function Login({success, setSuccess, setContent, setLoggedIn, set
                 <div>
                     <label htmlFor="psw"><b>Password</b></label>
                     <input type="password" ref={ref_password} placeholder="Inserisci Password" name="psw" id="psw" required />
-                </div> 
-                <button className="register-button" onClick={() => {LoginClick();}}>LOGIN<ArrowRightIcon /></button>
+                </div>                
+                <button className="login1-button" onClick={() => {LoginClick();}}>Login<ArrowRightIcon /></button>
+                <div className='other-login-container'>
+                    <h3>Oppure</h3>
+                    <button type="button" className="login-with-google-btn" > Sign in with Google </button>               
+                </div>
             </div>
         </>        
     );
