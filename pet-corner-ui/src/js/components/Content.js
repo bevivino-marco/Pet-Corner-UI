@@ -4,7 +4,7 @@ import Login from './Login';
 import Profile from './profile/Profile';
 import Registration from './Registration';
 
-function Content({content, setContent, setLoggedIn, setUsername}) {
+function Content({content, setContent, setLoggedIn, setUsername, username}) {
     const [success, setSuccess] = React.useState("");
 
     if(content === 'Login'){
@@ -20,7 +20,7 @@ function Content({content, setContent, setLoggedIn, setUsername}) {
     }
 
     if(content === 'Profile'){
-        return <Profile />
+        return <Profile username={username} />
     }
 
     return "Not implemented yet"

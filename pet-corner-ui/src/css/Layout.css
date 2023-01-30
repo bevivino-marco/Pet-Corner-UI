@@ -315,6 +315,17 @@ padding-top: 20px;
   font-size: 1.25rem;
 }
 
+.remove-animal-button{
+  background-color: transparent;
+  color:  rgb(226, 56, 22);
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  height: fit-content;
+  margin: auto;
+  margin-bottom: 1%;
+}
+
 h2 > svg{
   vertical-align: middle !important;
 }

@@ -17,7 +17,7 @@ function App() {
         <div className='main'>
           <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} setContent={setContent} username={username} />
           <div className='content'>
-            <Content content={content} setContent={setContent} setLoggedIn={setLoggedIn} setUsername={setUsername} />
+            <Content content={content} setContent={setContent} setLoggedIn={setLoggedIn} setUsername={setUsername} username={username} />
           </div>
           <Footer />
         </div>
