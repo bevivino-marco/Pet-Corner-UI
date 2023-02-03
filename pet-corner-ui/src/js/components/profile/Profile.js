@@ -28,7 +28,7 @@ function Profile({username}) {
         let options = {
             headers: null,
             type: "get",
-            url: `http://localhost:9000/api/v1/user-info/${username}`,
+            url: `http://localhost:9000/profile/v2/user-info/${username}`,
             dataType: null,
             cache: false,
             data: null,
@@ -54,7 +54,7 @@ function Profile({username}) {
         let options = {
             headers: headers,
             type: "get",
-            url: `http://localhost:8000/api/v1/animals/owner/${username}`,
+            url: `http://localhost:8000/profile/v2/animals/owner/${username}`,
             dataType: null,
             cache: false,
             data: null,
@@ -89,7 +89,7 @@ function Profile({username}) {
         let options = {
             headers: headers,
             type: "post",
-            url: `http://localhost:9000/api/v1/animal/add-animal-queue`,
+            url: `http://localhost:9000/profile/v2/animal/add-animal-queue`,
             dataType: "json",
             cache: false,
             data: JSON.stringify({
@@ -119,7 +119,7 @@ function Profile({username}) {
         let options = {
             headers: headers,
             type: "post",
-            url: `http://localhost:9000/api/v1/animal/delete-animal-queue`,
+            url: `http://localhost:9000/profile/v2/animal/delete-animal-queue`,
             dataType: "json",
             cache: false,
             data: JSON.stringify({

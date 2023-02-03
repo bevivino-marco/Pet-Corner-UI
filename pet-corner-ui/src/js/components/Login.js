@@ -31,7 +31,7 @@ export default function Login({success, setSuccess, setContent, setLoggedIn, set
         let options = {
             headers: null,
             type: "post",
-            url: "http://localhost:9000/api/v1/login",
+            url: "http://localhost:9000/profile/v2/login",
             dataType: null,
             cache: false,
             data: formData,
