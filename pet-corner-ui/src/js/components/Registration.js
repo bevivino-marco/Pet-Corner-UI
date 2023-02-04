@@ -35,7 +35,7 @@ export default function Registration({setContent, setSuccess}) {
                 'Content-Type': 'application/json',
             },
             type: "post",
-            url: "http://localhost:9000/profile/v2/user/save",
+            url: "http://localhost:8765/profile/v2/user/save",
             dataType: "json",
             cache: false,
             data: JSON.stringify({
