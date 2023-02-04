@@ -39,8 +39,8 @@ export default function Login({success, setSuccess, setContent, setLoggedIn, set
             contentType: false,
             success: function (response) {
                 setSuccess('');
-                sessionStorage.setItem("access_token", response.access_token);
-                sessionStorage.setItem("refresh_token", response.refresh_token);
+                sessionStorage.setItem("access_token", "Bearer "+response.access_token);
+                sessionStorage.setItem("refresh_token","Bearer "+response.refresh_token);
                 setLoggedIn(true);
                 setUsername(ref_email.current.value);
                 setContent('Profile');

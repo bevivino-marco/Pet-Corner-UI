@@ -25,8 +25,9 @@ function Profile({username}) {
     },[]);
 
     function getInfoUser(){
+        var headers = { 'Authorization': sessionStorage.access_token ? sessionStorage.access_token : null }
         let options = {
-            headers: null,
+            headers: headers,
             type: "get",
             url: `http://localhost:8765/profile/v2/user-info/${username}`,
             dataType: null,
@@ -49,12 +50,12 @@ function Profile({username}) {
 
     function getAnimalsUser(){
         
-        var headers = { 'Authorization': sessionStorage.token ? sessionStorage.token : null }
+        var headers = { 'Authorization': sessionStorage.access_token ? sessionStorage.access_token : null }
 
         let options = {
             headers: headers,
             type: "get",
-            url: `http://localhost:8765/profile/v2/animals/owner/${username}`,
+            url: `http://localhost:8765/adopt/v2/animals/owner/${username}`,
             dataType: null,
             cache: false,
             data: null,
@@ -81,7 +82,7 @@ function Profile({username}) {
         let description = prompt("Inserisci una descrizione del tuo animale", "");
 
         var headers = { 
-            'Authorization': sessionStorage.token ? sessionStorage.token : null,
+            'Authorization': sessionStorage.access_token ? sessionStorage.access_token : null,
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         };
@@ -111,7 +112,7 @@ function Profile({username}) {
 
     function removeAnimal(id){
         var headers = { 
-            'Authorization': sessionStorage.token ? sessionStorage.token : null,
+            'Authorization': sessionStorage.access_token ? sessionStorage.access_token : null,
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         };
