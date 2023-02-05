@@ -75,8 +75,9 @@ function Profile({username}) {
 
     function addAnimal(){
         let name = prompt("Come si chiama il tuo animale?", "");
-        let race = prompt("Che razza è il tuo animale?", "Cane");
-        let age = prompt("Quanti hanni ha il tuo animale?", "1");
+        let owner = email;
+        let age = prompt("Quanti anni ha il tuo animale?", "1");
+        let razza = prompt("Che animale vuoi inserire?", "1");
         let size = prompt("Quanto è grande il tuo animale?", "1");
         let provenence = prompt("Da dove viene il tuo animale?", "Torino");
         let description = prompt("Inserisci una descrizione del tuo animale", "");
@@ -95,9 +96,10 @@ function Profile({username}) {
             cache: false,
             data: JSON.stringify({
                 name: name,
-                race: race,
+                owner: owner,
                 age: age,
                 size: size,
+                type: razza,
                 provenence: provenence,
                 description: description
             }),
