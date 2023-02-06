@@ -1,12 +1,17 @@
 import React from 'react';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import callAjax from '../lib/Ajax';
+import { GoogleLogin } from '@react-oauth/google';
+import jwt_decode from "jwt-decode";
 
 export default function Login({success, setSuccess, setContent, setLoggedIn, setUsername}) {
     const [error, setError] = React.useState("");
 
     const ref_email = React.createRef();
     const ref_password = React.createRef();
+
+    React.useEffect(() => {
+    },[]);
 
     function LoginClick() {
         setError('');
@@ -68,6 +73,17 @@ export default function Login({success, setSuccess, setContent, setLoggedIn, set
         callAjax(options);
     }
 
+    function LoginGoogle(response) {
+        var token = response.credential;
+        setSuccess('');
+        sessionStorage.setItem("access_token", "Bearer " + token);
+        setLoggedIn(true);
+        var jwt = jwt_decode(response.credential);
+        console.log(jwt);
+        setUsername(jwt.email);
+        setContent('Profile');
+    }
+
     return (
         <>
             {success !== '' && <div className='success'>{success}</div> }
@@ -85,7 +101,7 @@ export default function Login({success, setSuccess, setContent, setLoggedIn, set
                 <button className="login1-button" onClick={() => {LoginClick();}}>Login<ArrowRightIcon /></button>
                 <div className='other-login-container'>
                     <h3>Oppure</h3>
-                    <button type="button" className="login-with-google-btn" > Sign in with Google </button>               
+                <GoogleLogin onSuccess={credentialResponse => { LoginGoogle(credentialResponse); }} onError={() => { console.log('Login Failed');}} />
                 </div>
             </div>
         </>        

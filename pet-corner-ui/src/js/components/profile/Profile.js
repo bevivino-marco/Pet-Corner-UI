@@ -50,6 +50,8 @@ function Profile({username}) {
 
     function getAnimalsUser(){
         
+        console.log("get animal user");
+
         var headers = { 'Authorization': sessionStorage.access_token ? sessionStorage.access_token : null }
 
         let options = {
@@ -103,10 +105,8 @@ function Profile({username}) {
                 provenence: provenence,
                 description: description
             }),
-            processData: false,
-            contentType: false,
-            success: function (response) {
-                getAnimalsUser();         
+            success: function (response) { 
+                console.log("Animale aggiunto");
             }
         };
         callAjax(options);
