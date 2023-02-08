@@ -200,8 +200,23 @@ padding-top: 20px;
   width: 250px;
 }
 
+.login-container > p {
+  cursor: pointer;
+}
+
 .other-login-container{
   text-align: center !important;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.other-login-container > a {
+  margin: 2%;
+}
+
+.other-login-container > a > img{
+  margin: 5px;
 }
 
 .login1-button {

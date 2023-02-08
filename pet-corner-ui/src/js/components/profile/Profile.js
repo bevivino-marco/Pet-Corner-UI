@@ -49,9 +49,6 @@ function Profile({username}) {
     }
 
     function getAnimalsUser(){
-        
-        console.log("get animal user");
-
         var headers = { 'Authorization': sessionStorage.access_token ? sessionStorage.access_token : null }
 
         let options = {
@@ -76,41 +73,44 @@ function Profile({username}) {
     }
 
     function addAnimal(){
-        let name = prompt("Come si chiama il tuo animale?", "");
-        let owner = email;
-        let age = prompt("Quanti anni ha il tuo animale?", "1");
-        let razza = prompt("Che animale vuoi inserire?", "1");
-        let size = prompt("Quanto è grande il tuo animale?", "1");
-        let provenence = prompt("Da dove viene il tuo animale?", "Torino");
-        let description = prompt("Inserisci una descrizione del tuo animale", "");
 
-        var headers = { 
-            'Authorization': sessionStorage.access_token ? sessionStorage.access_token : null,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        };
+    let name = prompt("Come si chiama il tuo animale?", "");
+    let owner = email;    
+    let age = prompt("Quanti anni ha il tuo animale?", "1");
+    let razza = prompt("Che animale vuoi inserire?", "1");    
+    let size = prompt("Quanto è grande il tuo animale?", "1");
+    let provenence = prompt("Da dove viene il tuo animale?", "Torino");    
+    let description = prompt("Inserisci una descrizione del tuo animale", "");
+    
+    var headers = { 
+        'Authorization': sessionStorage.access_token ? sessionStorage.access_token : null,        
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    };
 
-        let options = {
-            headers: headers,
-            type: "post",
-            url: `http://localhost:8765/profile/v2/animal/add-animal-queue`,
-            dataType: "json",
-            cache: false,
-            data: JSON.stringify({
-                name: name,
-                owner: owner,
-                age: age,
-                size: size,
-                type: razza,
-                provenence: provenence,
-                description: description
-            }),
-            success: function (response) { 
-                console.log("Animale aggiunto");
-            }
-        };
-        callAjax(options);
-    }
+    let options = {
+        headers: headers,        
+        type: "post",
+        url: `http://localhost:8765/profile/v2/animal/add-animal-queue`,        
+        dataType: "json",
+        cache: false,        
+        data: JSON.stringify({
+            name: name, 
+            owner: owner,
+            age: age,
+            size: size,
+            type: razza,
+            provenence: provenence,
+            description: description
+        }),        
+        processData: false,
+        contentType: false,        
+        success: function (response) {
+            console.log("Animale aggiunto");
+        }
+    };
+    callAjax(options);
+}
 
     function removeAnimal(id){
         var headers = { 

@@ -1,17 +1,12 @@
 import React from 'react';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import callAjax from '../lib/Ajax';
-import { GoogleLogin } from '@react-oauth/google';
-import jwt_decode from "jwt-decode";
+import { GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL } from '../lib/Path';
 
 export default function Login({success, setSuccess, setContent, setLoggedIn, setUsername}) {
     const [error, setError] = React.useState("");
 
     const ref_email = React.createRef();
-    const ref_password = React.createRef();
-
-    React.useEffect(() => {
-    },[]);
+    const ref_password = React.createRef();    
 
     function LoginClick() {
         setError('');
@@ -73,22 +68,11 @@ export default function Login({success, setSuccess, setContent, setLoggedIn, set
         callAjax(options);
     }
 
-    function LoginGoogle(response) {
-        var token = response.credential;
-        setSuccess('');
-        sessionStorage.setItem("access_token", "Bearer " + token);
-        setLoggedIn(true);
-        var jwt = jwt_decode(response.credential);
-        console.log(jwt);
-        setUsername(jwt.email);
-        setContent('Profile');
-    }
-
     return (
         <>
             {success !== '' && <div className='success'>{success}</div> }
             {error !== '' && <div className='error'>{error}</div> }
-            <h1>Login</h1>
+            <h2>Login</h2>
             <div className="login-container">
                 <div>
                     <label htmlFor="email"><b>Email</b></label>
@@ -98,10 +82,18 @@ export default function Login({success, setSuccess, setContent, setLoggedIn, set
                     <label htmlFor="psw"><b>Password</b></label>
                     <input type="password" ref={ref_password} placeholder="Inserisci Password" name="psw" id="psw" required />
                 </div>                
-                <button className="login1-button" onClick={() => {LoginClick();}}>Login<ArrowRightIcon /></button>
+                <button className="btn btn-outline-dark" onClick={() => {LoginClick();}}>Login</button>
+                <p onClick={() => { setContent("Registration")}}>Non sei ancora registrato? Iscriviti <b>qui</b></p>
                 <div className='other-login-container'>
-                    <h3>Oppure</h3>
-                <GoogleLogin onSuccess={credentialResponse => { LoginGoogle(credentialResponse); }} onError={() => { console.log('Login Failed');}} />
+                    <h6>Oppure</h6>
+                    <a className="btn btn-outline-dark" href={GOOGLE_AUTH_URL} role="button">
+                        <img width="20px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+                        Login with Google
+                    </a>
+                    <a className="btn btn-outline-dark" href={FACEBOOK_AUTH_URL} role="button">
+                        <img width="20px" alt="Facebook sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Facebook_logo_%28square%29.png/900px-Facebook_logo_%28square%29.png" />
+                        Login with Facebook
+                    </a>
                 </div>
             </div>
         </>        
