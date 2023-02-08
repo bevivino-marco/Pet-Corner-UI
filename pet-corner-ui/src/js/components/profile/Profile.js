@@ -79,7 +79,7 @@ function Profile({username}) {
     let age = prompt("Quanti anni ha il tuo animale?", "1");
     let razza = prompt("Che animale vuoi inserire?", "1");    
     let size = prompt("Quanto è grande il tuo animale?", "1");
-    let provenence = prompt("Da dove viene il tuo animale?", "Torino");    
+    let provenance = prompt("Da dove viene il tuo animale?", "Torino");
     let description = prompt("Inserisci una descrizione del tuo animale", "");
     
     var headers = { 
@@ -100,7 +100,7 @@ function Profile({username}) {
             age: age,
             size: size,
             type: razza,
-            provenence: provenence,
+            provenance: provenance,
             description: description
         }),        
         processData: false,
