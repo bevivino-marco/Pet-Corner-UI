@@ -3,6 +3,7 @@ import Adopt from './adopt/adopt';
 import Login from './Login';
 import Profile from './profile/Profile';
 import Registration from './Registration';
+import Therapy from './therapy/Therapy';
 
 function Content({content, setContent, setLoggedIn, setUsername, username}) {
     const [success, setSuccess] = React.useState("");
@@ -21,6 +22,10 @@ function Content({content, setContent, setLoggedIn, setUsername, username}) {
 
     if(content === 'Profile'){
         return <Profile username={username} />
+    }
+
+    if(content === 'Therapy'){
+        return <Therapy username={username}/>
     }
 
     return "Not implemented yet"
