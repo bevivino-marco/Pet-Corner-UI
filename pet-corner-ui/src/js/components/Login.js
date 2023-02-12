@@ -74,12 +74,12 @@ export default function Login({success, setSuccess, setContent, setLoggedIn, set
             {error !== '' && <div className='error'>{error}</div> }
             <h2>Login</h2>
             <div className="login-container">
+                <label htmlFor="email"><b>Email</b></label>
                 <div>
-                    <label htmlFor="email"><b>Email</b></label>
                     <input type="text" ref={ref_email} placeholder="Inserisci Email" name="email" id="email" required />
                 </div>   
-                <div>
-                    <label htmlFor="psw"><b>Password</b></label>
+                <label htmlFor="psw"><b>Password</b></label>
+                <div>                    
                     <input type="password" ref={ref_password} placeholder="Inserisci Password" name="psw" id="psw" required />
                 </div>                
                 <button className="btn btn-outline-dark" onClick={() => {LoginClick();}}>Login</button>

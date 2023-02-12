@@ -8,11 +8,17 @@ export default function Sidenav({open, setOpen, setContent}) {
         setOpen(!open);
     }
 
+    var dim = window.screen.width;
+
     return (
         <div className={open ? "sidenav" : "sidenavClosed"}>
-            <button className="menuBtn" onClick={toggleOpen}>
-                {open? <KeyboardDoubleArrowLeftIcon />: <KeyboardDoubleArrowRightIcon />}
-            </button>
+            {dim >= 600 && 
+                <button className="menuBtn" onClick={toggleOpen}>
+                    {open? <KeyboardDoubleArrowLeftIcon />: <KeyboardDoubleArrowRightIcon />}
+                </button>
+            }
+
+            
             {navData.map(item =>{
                 return (<div key={item.id} className="sideitem" onClick={() => setContent(item.text)}>
                         {item.icon}

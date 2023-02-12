@@ -355,6 +355,26 @@ hr.solid {
   margin-top: 2%;
 }
 
+/************************************************************ THERAPY *******************************************************/
+
+.filters-containers{
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.filters-containers > div{
+  margin-top: 2%;
+}
+
+.filters-containers > div > button > svg {
+  vertical-align: middle !important;
+  width: 20px;
+  height: 20px;
+}
+
+
+
 /************************************************************ FOOTER *******************************************************/
 
 .footer {
@@ -418,5 +438,6 @@ hr.solid {
 
 /************************************************************ MEDIA QUERY *******************************************************/
 
-@media only screen and (max-width: 600px) {
+@media screen and (max-width: 600px) {
+
 }

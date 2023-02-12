@@ -4,7 +4,9 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import MaleIcon from "@mui/icons-material/Male";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import callAjax from "../../lib/Ajax";
+import SearchIcon from '@mui/icons-material/Search';
 import FemaleIcon from "@mui/icons-material/Female";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 function Therapy() {
 
@@ -104,60 +106,44 @@ function Therapy() {
 
     return (
         <>
-            <div className='row align-items-right' >
-                <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li class="nav-item">
-                        <input>
-                        </input>
-                        <button>SEARCH
-
-                        </button>
-                    </li>
-
-                    <li class="nav-item"><i class="bi bi-filter-square "></i>
-                        <form action="#">
-                            <label htmlFor="lang">Filter</label>
-                            <ul>
-                                <li>
-                                    <label>Min age: </label>
-                                    <input type="number" id="quantity" name="quantity" min="0" max="20"/>
-                                    <label>Max age: </label>
-                                    <input type="number" id="quantity" name="quantity" min="0" max="20" />
-                                </li>
-                                <li>
-                                    <label>Min size: </label>
-                                    <input type="number" id="quantity" name="quantity" min="0" max="3" />
-                                    <label>Max size: </label>
-                                    <input type="number" id="quantity" name="quantity" min="0" max="3" />
-                                </li>
-                                <li>
-                                    <label htmlFor="lang">Provenance</label>
-                                    <select name="languages" id="lang">
-                                        <option value="javascript">Torino</option>
-                                        <option value="php">Milano</option>
-                                        <option value="java">Napoli</option>
-                                        <option value="golang">Roma</option>
-                                    </select>
-                                </li>
-                            </ul>
-                            <input type="submit" value="Submit"/>
-                        </form>
-                        <i className="bi bi-filter-left"></i>
-                    </li>
-
-                    <li class="nav-item ">
-                        <form action="#">
-                            <label htmlFor="lang">Sort by</label>
-                            <select name="languages" id="lang">
-                                <option value="javascript">Age increase</option>
-                                <option value="php">Age decrease</option>
-                                <option value="java">Size increase</option>
-                                <option value="golang">Size decrease</option>
-                            </select>
-                            <input type="submit" value="Submit"/>
-                        </form><i class="bi bi-filter-left"></i>
-                    </li>
-                </ul>
+            <div className='filters-containers'>
+                <div>
+                    <input className='input-search'></input>
+                    <button className='footer-button'><SearchIcon /></button>                           
+                </div>   
+                <div>
+                    <label>Età minima: </label>
+                    <input type="number" id="age-min" name="quantity" min="0" max="20"/>
+                    <label>Età massima: </label>
+                    <input type="number" id="age-max" name="quantity" min="0" max="20" />
+                    <button className='footer-button'><ArrowForwardIosIcon /></button>                           
+                </div>
+                <div>
+                    <label>Dimensione minima: </label>
+                    <input type="number" id="dim-min" name="quantity" min="1" max="3"/>
+                    <label>Età massima: </label>
+                    <input type="number" id="dim-max" name="quantity" min="1" max="3" />
+                    <button className='footer-button'><ArrowForwardIosIcon /></button>   
+                </div>
+                <div>
+                    <label>Provenienza: </label>
+                    <select name="cities">
+                        <option value="1">Torino</option>
+                        <option value="2">Milano</option>
+                        <option value="3">Napoli</option>
+                        <option value="4">Roma</option>
+                    </select>
+                    <button className='footer-button'><ArrowForwardIosIcon /></button>   
+                </div>
+                <div>
+                    <label>Ordina per</label>
+                    <select id="orderBy" name="orderBy">
+                        <option value="1">Età crescente</option>
+                        <option value="2">Età decrescente</option>
+                        <option value="3">Dimensione crescente</option>
+                        <option value="4">Dimensione decrescente</option>
+                    </select>
+                </div>   
             </div>
             <hr className='solid'/>
             <h2>Tutti gli animali da terapia <PetsIcon /></h2>
@@ -165,16 +151,15 @@ function Therapy() {
             {animalTherapyLoaded && <div className='profile-animals-container'>
                 {animalsTherapy.map(item =>{
                     return (
-                <div key={item.id} className="animal-box">
-                    <img src={item.img} alt={item.name}/>
-                    <p>{item.name} {item.gender === 'M' ? <MaleIcon /> : <FemaleIcon />}</p>
-                    <button className='remove-animal-button' title='Rimuovi animale' onClick={() => removeAnimalTherapy(item.id)}><RemoveCircleIcon /></button>
-                </div>
+                        <div key={item.id} className="animal-box">
+                            <img src={item.img} alt={item.name}/>
+                            <p>{item.name} {item.gender === 'M' ? <MaleIcon /> : <FemaleIcon />}</p>
+                            <button className='remove-animal-button' title='Rimuovi animale' onClick={() => removeAnimalTherapy(item.id)}><RemoveCircleIcon /></button>
+                        </div>
                     );
                 })}
             </div>}
-        </>
-
+        </> 
     );
 }
 
