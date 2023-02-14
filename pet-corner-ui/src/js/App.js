@@ -6,6 +6,7 @@ import Sidenav from './components/Sidenav';
 import Content from './components/Content';
 import jwt from 'jwt-decode';
 
+
 function App() {
   const [open, setOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
