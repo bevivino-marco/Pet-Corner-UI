@@ -296,6 +296,7 @@ padding-top: 20px;
 .animal-box{
   display: flex;
   flex-direction: column;
+  width:220px;
   margin: auto;
   border: 2px solid rgb(98,205,163);
   border-radius: 5px;
@@ -441,3 +442,6 @@ hr.solid {
 @media screen and (max-width: 600px) {
 
 }
+
+
+

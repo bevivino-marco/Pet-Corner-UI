@@ -4,6 +4,9 @@ import Login from './Login';
 import Profile from './profile/Profile';
 import Registration from './Registration';
 import Therapy from './therapy/therapy';
+import Sitter from './sitter/Sitter';
+import Trainer from './trainer/Trainer';
+import Homepage from './homepage/homepage';
 
 function Content({content, setContent, setLoggedIn, setUsername, username}) {
     const [success, setSuccess] = React.useState("");
@@ -26,6 +29,18 @@ function Content({content, setContent, setLoggedIn, setUsername, username}) {
 
     if(content === 'Pet Therapy'){
         return <Therapy />
+    }
+
+    if(content === 'Pet Sitter'){
+        return <Sitter />
+    }
+
+    if(content === 'Training'){
+        return <Trainer />
+    }
+
+    if(content === 'Home'){
+        return <Homepage />
     }
 
     return "Not implemented yet"

@@ -1,23 +1,20 @@
 import React  from 'react';
-import PetsIcon from "@mui/icons-material/Pets";
-import MaleIcon from "@mui/icons-material/Male";
 import callAjax from "../../lib/Ajax";
 import SearchIcon from '@mui/icons-material/Search';
-import FemaleIcon from "@mui/icons-material/Female";
+import ManIcon from "@mui/icons-material/Man";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-function Therapy() {
-
-    const [animalTherapyLoaded, setAnimalTherapyLoaded] = React.useState(false);
-    const [animalsTherapy, setAnimalsTherapy] = React.useState([]);
+function Sitter() {
+    const [sitterLoaded, setSitterLoaded] = React.useState(false);
+    const [sitter, setSitter] = React.useState([])
 
     const [localityLoaded, setLocalityLoaded] = React.useState(false);
     const [locality, setLocality] = React.useState([])
 
     React.useEffect(() => {
-        getAnimalsTherapy();
+        getSitter();
         getLocality();
-    },[]);
+    },[])
 
     function getLocality(){
         var headers = { 'Authorization': sessionStorage.access_token ? sessionStorage.access_token : null }
@@ -25,7 +22,7 @@ function Therapy() {
         let options = {
             headers: headers,
             type: "get",
-            url: `http://localhost:8765/therapy/v2/animalsTherapy/provenances`,
+            url: `http://localhost:8765/sitter/v2/sitters/provenances`,
             dataType: null,
             cache: false,
             data: null,
@@ -42,14 +39,13 @@ function Therapy() {
         };
         callAjax(options);
     }
-
-    function getAnimalsTherapy(){
+    function getSitter(){
         var headers = { 'Authorization': sessionStorage.access_token ? sessionStorage.access_token : null }
 
         let options = {
             headers: headers,
             type: "get",
-            url: `http://localhost:8765/therapy/v2/animalsTherapy`,
+            url: `http://localhost:8765/sitter/v2/sitters`,
             dataType: null,
             cache: false,
             data: null,
@@ -57,37 +53,36 @@ function Therapy() {
             contentType: false,
             success: function (response) {
                 var tmp = [];
-                response.map(animalTherapy => {
-                    return tmp.push(animalTherapy);
+                response.map(sitter => {
+                    return tmp.push(sitter);
                 });
-                setAnimalsTherapy(tmp);
-                setAnimalTherapyLoaded(true);
+                setSitter(tmp);
+                setSitterLoaded(true);
             }
         };
         callAjax(options);
     }
-
 
     return (
         <>
             <div className='filters-containers'>
                 <div>
                     <input className='input-search'></input>
-                    <button className='footer-button'><SearchIcon /></button>                           
-                </div>   
+                    <button className='footer-button'><SearchIcon /></button>
+                </div>
                 <div>
                     <label>Età minima: </label>
                     <input type="number" id="age-min" name="quantity" min="0" max="20"/>
                     <label>Età massima: </label>
                     <input type="number" id="age-max" name="quantity" min="0" max="20" />
-                    <button className='footer-button'><ArrowForwardIosIcon /></button>                           
+                    <button className='footer-button'><ArrowForwardIosIcon /></button>
                 </div>
                 <div>
                     <label>Dimensione minima: </label>
                     <input type="number" id="dim-min" name="quantity" min="1" max="3"/>
                     <label>Età massima: </label>
                     <input type="number" id="dim-max" name="quantity" min="1" max="3" />
-                    <button className='footer-button'><ArrowForwardIosIcon /></button>   
+                    <button className='footer-button'><ArrowForwardIosIcon /></button>
                 </div>
                 <div>
                     <label>Località</label>
@@ -108,25 +103,25 @@ function Therapy() {
                         <option value="3">Dimensione crescente</option>
                         <option value="4">Dimensione decrescente</option>
                     </select>
-                </div>   
+                </div>
             </div>
             <hr className='solid'/>
-            <h2>Tutti gli animali da terapia <PetsIcon /></h2>
-            {animalTherapyLoaded && <div className='profile-animals-container'>
-                {animalsTherapy.map(item =>{
+            <h2>Tutti i pet Sitter <ManIcon /></h2>
+            {sitterLoaded && <div className='profile-animals-container'>
+                {sitter.map(item =>{
                     return (
                         <div key={item.id} className="animal-box">
                             <img src={item.img} alt={item.name}/>
-                            <p>{item.name}, {item.age} years, {item.gender === 'M' ? <MaleIcon /> : <FemaleIcon />}</p>
+                            <p>{item.name} {item.surname}</p>
                             <p>{item.locality}</p>
-                            <p>{item.description}</p>
+                            <p>{item.personalDescription}</p>
                             <p>{item.owner}</p>
                         </div>
                     );
                 })}
             </div>}
-        </> 
+        </>
     );
 }
 
-export default Therapy;
+export default Sitter;

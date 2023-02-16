@@ -1,65 +1,132 @@
 import React  from 'react';
+import PetsIcon from "@mui/icons-material/Pets";
+import MaleIcon from "@mui/icons-material/Male";
+import callAjax from "../../lib/Ajax";
+import SearchIcon from '@mui/icons-material/Search';
+import FemaleIcon from "@mui/icons-material/Female";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 function Adopt() {
-  return (
-    <>
-        <div className='row align-items-right' >
-            <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li class="nav-item">
-                <input>
-                </input>
-                <button>SEARCH
 
-                </button>
-                </li>
-            
-                <li class="nav-item">Filters<i class="bi bi-filter-square "></i></li>
-            
-                <li class="nav-item">Sort by<i class="bi bi-filter-left"></i></li>
-            </ul>
-            </div>
-            <div>
-            <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-right mb-md-4">
-            <li class="nav-item">
-                <button>DOGS</button>
-                </li>
-                <li class="nav-item">
-                <button>CATS</button>
-                </li>
-                <li class="nav-item">
-                <button>RABBITS</button>
-                </li>
-            </ul>
+    const [animalAdoptLoaded, setAnimalAdoptLoaded] = React.useState(false);
+    const [animalsAdopt, setAnimalsAdopt] = React.useState([]);
 
-            </div>
-            <div>
-            <div class="album py-5 bg-light">
-                <div class="container">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    <div class="col">
-                    <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                        <div class="card-body">
-                        <ul>
-                        <li>Name:</li>
-                        <li>Age:</li>
-                        <li>Provenance:</li>
-                        </ul>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
+    const [localityLoaded, setLocalityLoaded] = React.useState(false);
+    const [locality, setLocality] = React.useState([])
+
+    React.useEffect(() => {
+        getAnimalsAdopt();
+        getLocality();
+    },[]);
+
+    function getLocality(){
+        var headers = { 'Authorization': sessionStorage.access_token ? sessionStorage.access_token : null }
+
+        let options = {
+            headers: headers,
+            type: "get",
+            url: `http://localhost:8765/adopt/v2/animals/provenances`,
+            dataType: null,
+            cache: false,
+            data: null,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                var tmp = [];
+                response.map(locality => {
+                    return tmp.push(locality);
+                });
+                setLocality(tmp);
+                setLocalityLoaded(true);
+            }
+        };
+        callAjax(options);
+    }
+
+    function getAnimalsAdopt(){
+        var headers = { 'Authorization': sessionStorage.access_token ? sessionStorage.access_token : null }
+
+        let options = {
+            headers: headers,
+            type: "get",
+            url: `http://localhost:8765/adopt/v2/animals`,
+            dataType: null,
+            cache: false,
+            data: null,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                var tmp = [];
+                response.map(animalAdopt => {
+                    return tmp.push(animalAdopt);
+                });
+                setAnimalsAdopt(tmp);
+                setAnimalAdoptLoaded(true);
+            }
+        };
+        callAjax(options);
+    }
+
+
+    return (
+        <>
+            <div className='filters-containers'>
+                <div>
+                    <input className='input-search'></input>
+                    <button className='footer-button'><SearchIcon /></button>
                 </div>
+                <div>
+                    <label>Età minima: </label>
+                    <input type="number" id="age-min" name="quantity" min="0" max="20"/>
+                    <label>Età massima: </label>
+                    <input type="number" id="age-max" name="quantity" min="0" max="20" />
+                    <button className='footer-button'><ArrowForwardIosIcon /></button>
+                </div>
+                <div>
+                    <label>Dimensione minima: </label>
+                    <input type="number" id="dim-min" name="quantity" min="1" max="3"/>
+                    <label>Età massima: </label>
+                    <input type="number" id="dim-max" name="quantity" min="1" max="3" />
+                    <button className='footer-button'><ArrowForwardIosIcon /></button>
+                </div>
+                <div>
+                    <label>Località</label>
+                    {localityLoaded && <select name="locality">
+                        {locality.map(item =>{
+                            return (
+                                <option value={item}>{item}</option>
+                            );
+                        })}
+                    </select>}
+                    <button className='footer-button'><ArrowForwardIosIcon /></button>
+                </div>
+                <div>
+                    <label>Ordina per</label>
+                    <select id="orderBy" name="orderBy">
+                        <option value="1">Età crescente</option>
+                        <option value="2">Età decrescente</option>
+                        <option value="3">Dimensione crescente</option>
+                        <option value="4">Dimensione decrescente</option>
+                    </select>
                 </div>
             </div>
-            </div>
-    </>
-
-  );
+            <hr className='solid'/>
+            <h2>Tutti gli animali da adottare <PetsIcon /></h2>
+            {animalAdoptLoaded && <div className='profile-animals-container'>
+                {animalsAdopt.map(item =>{
+                    return (
+                        <div key={item.id} className="animal-box">
+                            <img src={item.img} alt={item.name}/>
+                            <p>{item.name}, {item.age} years, {item.gender === 'M' ? <MaleIcon /> : <FemaleIcon />}</p>
+                            <p>{item.locality}</p>
+                            <p>{item.description}</p>
+                            <p>{item.owner}</p>
+                        </div>
+                    );
+                })}
+            </div>}
+        </>
+    );
 }
 
 export default Adopt;
