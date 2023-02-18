@@ -1,20 +1,17 @@
 import React from "react";
-import PetsIcon from "@mui/icons-material/Pets";
-import MaleIcon from "@mui/icons-material/Male";
 import callAjax from "../../lib/Ajax";
 import SearchIcon from "@mui/icons-material/Search";
-import FemaleIcon from "@mui/icons-material/Female";
+import ManIcon from "@mui/icons-material/Man";
 import {
   compareByAgeAsc,
   compareByAgeDesc,
-  compareByDimAscAnimal,
-  compareByDimDescAnimal,
-  getAnimalImage,
+  compareByDimAsc,
+  compareByDimDesc,
 } from "../../lib/Common.js";
 
-function Adopt() {
-  const [animalAdoptLoaded, setAnimalAdoptLoaded] = React.useState(false);
-  const [animalsAdopt, setAnimalsAdopt] = React.useState([]);
+function Trainer() {
+  const [trainerLoaded, setTrainerLoaded] = React.useState(false);
+  const [trainer, setTrainer] = React.useState([]);
 
   const [localityLoaded, setLocalityLoaded] = React.useState(false);
   const [locality, setLocality] = React.useState([]);
@@ -29,21 +26,21 @@ function Adopt() {
   const ref_place = React.createRef();
 
   React.useEffect(() => {
-    getAnimalsAdopt();
+    getTrainer();
     getLocality();
   }, []);
 
   React.useEffect(() => {
-    var tmp = animalsAdopt.map((a) => {
+    var tmp = trainer.map((a) => {
       return { ...a };
     });
 
     if (currentOrder === "1") tmp.sort(compareByAgeAsc);
     if (currentOrder === "2") tmp.sort(compareByAgeDesc);
-    if (currentOrder === "3") tmp.sort(compareByDimAscAnimal);
-    if (currentOrder === "4") tmp.sort(compareByDimDescAnimal);
+    if (currentOrder === "3") tmp.sort(compareByDimAsc);
+    if (currentOrder === "4") tmp.sort(compareByDimDesc);
 
-    setAnimalsAdopt(tmp);
+    setTrainer(tmp);
   }, [currentOrder]);
 
   function getLocality() {
@@ -56,7 +53,7 @@ function Adopt() {
     let options = {
       headers: headers,
       type: "get",
-      url: `http://localhost:8765/adopt/v2/animals/provenances`,
+      url: `http://localhost:8765/trainer/v2/trainers/provenances`,
       dataType: null,
       cache: false,
       data: null,
@@ -74,7 +71,7 @@ function Adopt() {
     callAjax(options);
   }
 
-  function getAnimalsAdopt() {
+  function getTrainer() {
     var headers = {
       Authorization: sessionStorage.access_token
         ? sessionStorage.access_token
@@ -84,7 +81,7 @@ function Adopt() {
     let options = {
       headers: headers,
       type: "get",
-      url: `http://localhost:8765/adopt/v2/animals`,
+      url: `http://localhost:8765/trainer/v2/trainers`,
       dataType: null,
       cache: false,
       data: null,
@@ -92,12 +89,12 @@ function Adopt() {
       contentType: false,
       success: function(response) {
         var tmp = [];
-        response.map((animalAdopt) => {
-          return tmp.push(animalAdopt);
+        response.map((trainer) => {
+          return tmp.push(trainer);
         });
         tmp.sort(compareByAgeAsc);
-        setAnimalsAdopt(tmp);
-        setAnimalAdoptLoaded(true);
+        setTrainer(tmp);
+        setTrainerLoaded(true);
       },
     };
     callAjax(options);
@@ -125,7 +122,7 @@ function Adopt() {
     let options = {
       headers: headers,
       type: "get",
-      url: `http://localhost:8765/adopt/v2/animals/filter/age/${min}/${max}`,
+      url: `http://localhost:8765/trainer/v2/trainers/filter/age/${min}/${max}`,
       dataType: null,
       cache: false,
       data: null,
@@ -136,8 +133,8 @@ function Adopt() {
         res.map((trainer) => {
           return tmp.push(trainer);
         });
-        setAnimalsAdopt(tmp);
-        setAnimalAdoptLoaded(true);
+        setTrainer(tmp);
+        setTrainerLoaded(true);
       },
     };
     callAjax(options);
@@ -161,7 +158,7 @@ function Adopt() {
     let options = {
       headers: headers,
       type: "get",
-      url: `http://localhost:8765/adopt/v2/animals/filter/size/${min}/${max}`,
+      url: `http://localhost:8765/trainer/v2/trainers/filter/sizeAllowed/${min}/${max}`,
       dataType: null,
       cache: false,
       data: null,
@@ -172,8 +169,8 @@ function Adopt() {
         res.map((trainer) => {
           return tmp.push(trainer);
         });
-        setAnimalsAdopt(tmp);
-        setAnimalAdoptLoaded(true);
+        setTrainer(tmp);
+        setTrainerLoaded(true);
       },
     };
     callAjax(options);
@@ -191,7 +188,7 @@ function Adopt() {
     let options = {
       headers: headers,
       type: "get",
-      url: `http://localhost:8765/adopt/v2/animals/provenance/${place}`,
+      url: `http://localhost:8765/trainer/v2/trainers/locality/${place}`,
       dataType: null,
       cache: false,
       data: null,
@@ -202,8 +199,8 @@ function Adopt() {
         res.map((trainer) => {
           return tmp.push(trainer);
         });
-        setAnimalsAdopt(tmp);
-        setAnimalAdoptLoaded(true);
+        setTrainer(tmp);
+        setTrainerLoaded(true);
       },
     };
     callAjax(options);
@@ -300,23 +297,29 @@ function Adopt() {
       </div>
       <hr className="solid" />
       <h2>
-        Tutti gli animali da terapia <PetsIcon />
+        Pet Trainers <ManIcon />
       </h2>
-      {animalAdoptLoaded && (
+      {trainerLoaded && (
         <div className="profile-animals-container">
-          {animalsAdopt.map((item) => {
+          {trainer.map((item) => {
             return (
               <div key={item.id} className="animal-box">
-                <img src={getAnimalImage(item.type)} alt={item.name} />
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/21/21104.png"
+                  alt={item.name}
+                />
                 <p>
-                  {item.name} {item.sex === "M" ? <MaleIcon /> : <FemaleIcon />}
+                  <strong>
+                    {item.name} {item.surname}
+                  </strong>
                 </p>
-                <p>{item.age} years </p>
+                <p>{item.locality}</p>
+                <p>{item.age} anni</p>
                 <p className="description">
-                  <a href={`mailto:${item.owner}`}>{item.owner}</a>
+                  <em>{item.personalDescription}</em>
                 </p>
-                <p className="description">
-                  <em>{item.description}</em>
+                <p>
+                  <a href={`mailto:${item.email}`}>{item.email}</a>
                 </p>
               </div>
             );
@@ -327,4 +330,4 @@ function Adopt() {
   );
 }
 
-export default Adopt;
+export default Trainer;

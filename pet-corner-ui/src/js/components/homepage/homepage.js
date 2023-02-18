@@ -1,9 +1,13 @@
 import React  from 'react';
 
 function Homepage() {
-    return (
-        <>HOMEPAGE</>
+
+    return(
+        <>
+
+        </>
     );
+
 }
 
 export default Homepage;
