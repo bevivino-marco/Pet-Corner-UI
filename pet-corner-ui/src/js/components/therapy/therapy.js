@@ -63,9 +63,10 @@ function Therapy() {
       contentType: false,
       success: function(response) {
         var tmp = [];
-        response.map((locality) => {
-          return tmp.push(locality);
-        });
+        if (response)
+          response.map((locality) => {
+            return tmp.push(locality);
+          });
         setLocality(tmp);
         setLocalityLoaded(true);
       },
@@ -91,9 +92,10 @@ function Therapy() {
       contentType: false,
       success: function(response) {
         var tmp = [];
-        response.map((animalTherapy) => {
-          return tmp.push(animalTherapy);
-        });
+        if (response)
+          response.map((animalTherapy) => {
+            return tmp.push(animalTherapy);
+          });
         setAnimalsTherapy(tmp);
         setAnimalTherapyLoaded(true);
       },

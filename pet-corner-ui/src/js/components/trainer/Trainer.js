@@ -61,9 +61,10 @@ function Trainer() {
       contentType: false,
       success: function(response) {
         var tmp = [];
-        response.map((locality) => {
-          return tmp.push(locality);
-        });
+        if (response)
+          response.map((locality) => {
+            return tmp.push(locality);
+          });
         setLocality(tmp);
         setLocalityLoaded(true);
       },
@@ -89,9 +90,10 @@ function Trainer() {
       contentType: false,
       success: function(response) {
         var tmp = [];
-        response.map((trainer) => {
-          return tmp.push(trainer);
-        });
+        if (response)
+          response.map((trainer) => {
+            return tmp.push(trainer);
+          });
         tmp.sort(compareByAgeAsc);
         setTrainer(tmp);
         setTrainerLoaded(true);

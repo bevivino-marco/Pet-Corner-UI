@@ -60,9 +60,10 @@ function Sitter() {
       contentType: false,
       success: function(response) {
         var tmp = [];
-        response.map((locality) => {
-          return tmp.push(locality);
-        });
+        if (response)
+          response.map((locality) => {
+            return tmp.push(locality);
+          });
         setLocality(tmp);
         setLocalityLoaded(true);
       },
@@ -88,9 +89,10 @@ function Sitter() {
       contentType: false,
       success: function(response) {
         var tmp = [];
-        response.map((sitter) => {
-          return tmp.push(sitter);
-        });
+        if (response)
+          response.map((sitter) => {
+            return tmp.push(sitter);
+          });
         tmp.sort(compareByAgeAsc);
         setSitter(tmp);
         setSitterLoaded(true);

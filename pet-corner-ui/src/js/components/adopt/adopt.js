@@ -64,9 +64,10 @@ function Adopt() {
       contentType: false,
       success: function(response) {
         var tmp = [];
-        response.map((locality) => {
-          return tmp.push(locality);
-        });
+        if (response)
+          response.map((locality) => {
+            return tmp.push(locality);
+          });
         setLocality(tmp);
         setLocalityLoaded(true);
       },
@@ -92,9 +93,10 @@ function Adopt() {
       contentType: false,
       success: function(response) {
         var tmp = [];
-        response.map((animalAdopt) => {
-          return tmp.push(animalAdopt);
-        });
+        if (response)
+          response.map((animalAdopt) => {
+            return tmp.push(animalAdopt);
+          });
         tmp.sort(compareByAgeAsc);
         setAnimalsAdopt(tmp);
         setAnimalAdoptLoaded(true);

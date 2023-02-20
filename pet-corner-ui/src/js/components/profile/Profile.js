@@ -82,9 +82,10 @@ function Profile({ username, setContent, setLoggedIn }) {
       contentType: false,
       success: function(response) {
         var tmp = [];
-        response.map((animal) => {
-          return tmp.push(animal);
-        });
+        if (response)
+          response.map((animal) => {
+            return tmp.push(animal);
+          });
         setAnimals(tmp);
         setAnimalLoaded(true);
       },
@@ -203,9 +204,10 @@ function Profile({ username, setContent, setLoggedIn }) {
       contentType: false,
       success: function(response) {
         var tmp = [];
-        response.map((animalTherapy) => {
-          return tmp.push(animalTherapy);
-        });
+        if (response)
+          response.map((animalTherapy) => {
+            return tmp.push(animalTherapy);
+          });
         setAnimalsTherapy(tmp);
         setAnimalTherapyLoaded(true);
       },
