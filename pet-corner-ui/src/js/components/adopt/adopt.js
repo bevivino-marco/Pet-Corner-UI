@@ -300,7 +300,7 @@ function Adopt() {
       </div>
       <hr className="solid" />
       <h2>
-        Tutti gli animali da terapia <PetsIcon />
+        Tutti gli animali da adottare <PetsIcon />
       </h2>
       {animalAdoptLoaded && (
         <div className="profile-animals-container">

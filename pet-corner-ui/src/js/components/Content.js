@@ -54,7 +54,7 @@ function Content({ content, setContent, setLoggedIn, setUsername, username }) {
   }
 
   if (content === "Home") {
-    return <Homepage />;
+    return <Homepage setContent={setContent} />;
   }
 
   return "Not implemented yet";

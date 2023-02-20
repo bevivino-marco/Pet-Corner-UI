@@ -486,27 +486,29 @@ function Profile({ username, setContent, setLoggedIn }) {
       </button>
       {animalLoaded && (
         <div className="profile-animals-container">
-          {animals.map((item) => {
-            return (
-              <div key={item.id} className="animal-box">
-                <img src={getAnimalImage(item.type)} alt={item.name} />
-                <p>
-                  {item.name} {item.sex === "M" ? <MaleIcon /> : <FemaleIcon />}
-                </p>
-                <p>{item.age} years </p>
-                <p>
-                  <em>{item.description}</em>
-                </p>
-                <button
-                  className="remove-animal-button"
-                  title="Rimuovi animale"
-                  onClick={() => removeAnimal(item.id)}
-                >
-                  <RemoveCircleIcon />
-                </button>
-              </div>
-            );
-          })}
+          {animals &&
+            animals.map((item) => {
+              return (
+                <div key={item.id} className="animal-box">
+                  <img src={getAnimalImage(item.type)} alt={item.name} />
+                  <p>
+                    {item.name}{" "}
+                    {item.sex === "M" ? <MaleIcon /> : <FemaleIcon />}
+                  </p>
+                  <p>{item.age} years </p>
+                  <p>
+                    <em>{item.description}</em>
+                  </p>
+                  <button
+                    className="remove-animal-button"
+                    title="Rimuovi animale"
+                    onClick={() => removeAnimal(item.id)}
+                  >
+                    <RemoveCircleIcon />
+                  </button>
+                </div>
+              );
+            })}
         </div>
       )}
       <hr className="solid" />
@@ -525,27 +527,29 @@ function Profile({ username, setContent, setLoggedIn }) {
       </button>
       {animalTherapyLoaded && (
         <div className="profile-animals-container">
-          {animalsTherapy.map((item) => {
-            return (
-              <div key={item.id} className="animal-box">
-                <img src={getAnimalImage(item.type)} alt={item.name} />
-                <p>
-                  {item.name} {item.sex === "M" ? <MaleIcon /> : <FemaleIcon />}
-                </p>
-                <p>{item.age} years </p>
-                <p>
-                  <em>{item.description}</em>
-                </p>
-                <button
-                  className="remove-animal-button"
-                  title="Rimuovi animale da terapia"
-                  onClick={() => removeAnimalTherapy(item.id)}
-                >
-                  <RemoveCircleIcon />
-                </button>
-              </div>
-            );
-          })}
+          {animalsTherapy &&
+            animalsTherapy.map((item) => {
+              return (
+                <div key={item.id} className="animal-box">
+                  <img src={getAnimalImage(item.type)} alt={item.name} />
+                  <p>
+                    {item.name}{" "}
+                    {item.sex === "M" ? <MaleIcon /> : <FemaleIcon />}
+                  </p>
+                  <p>{item.age} years </p>
+                  <p>
+                    <em>{item.description}</em>
+                  </p>
+                  <button
+                    className="remove-animal-button"
+                    title="Rimuovi animale da terapia"
+                    onClick={() => removeAnimalTherapy(item.id)}
+                  >
+                    <RemoveCircleIcon />
+                  </button>
+                </div>
+              );
+            })}
         </div>
       )}
     </>
