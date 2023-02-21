@@ -320,7 +320,7 @@ function Trainer() {
                 <p className="description">
                   <em>{item.personalDescription}</em>
                 </p>
-                <p>
+                <p className="description">
                   <a href={`mailto:${item.email}`}>{item.email}</a>
                 </p>
               </div>
